@@ -9,10 +9,6 @@ import org.json.JSONException;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
- * Created by NA on 2020-07-04
- * skehdgur8591@naver.com
- */
 public class FishData {
     private Integer id;
     private String name;

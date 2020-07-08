@@ -18,10 +18,6 @@ import java.util.ArrayList;
 
 import kr.hs.dgsw.animal_crossingfish_application.data.FishData;
 
-/**
- * Created by NA on 2020-07-04
- * skehdgur8591@naver.com
- */
 public class FishListAdapter extends RecyclerView.Adapter<FishListAdapter.ViewHolder>{
     private ArrayList<FishData> mData = null;
 
