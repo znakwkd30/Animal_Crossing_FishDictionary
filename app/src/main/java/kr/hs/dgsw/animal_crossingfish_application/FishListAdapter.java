@@ -1,6 +1,7 @@
 package kr.hs.dgsw.animal_crossingfish_application;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.view.LayoutInflater;
@@ -18,11 +19,17 @@ import java.util.ArrayList;
 
 import kr.hs.dgsw.animal_crossingfish_application.data.FishData;
 
+/**
+ * Created by NA on 2020-07-04
+ * skehdgur8591@naver.com
+ */
 public class FishListAdapter extends RecyclerView.Adapter<FishListAdapter.ViewHolder>{
-    private ArrayList<FishData> mData = null;
+    private ArrayList<FishData> mData;
+    private Context context;
 
-    public FishListAdapter(ArrayList<FishData> mData) {
+    public FishListAdapter(ArrayList<FishData> mData, Context context) {
         this.mData = mData;
+        this.context = context;
     }
 
     @NonNull
@@ -33,15 +40,20 @@ public class FishListAdapter extends RecyclerView.Adapter<FishListAdapter.ViewHo
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, final int position) {
         String text = mData.get(position).getName();
-//        Drawable drawable = mData.get(position).getImageUrl();
 
         holder.nameTextView.setText(text);
-//        holder.imageView.setImageURI(mData.get(position).getImageUrl());
-//        holder.imageView.setImageDrawable(drawable);
         Glide.with(holder.itemView.getContext()).load(mData.get(position).getImageUrl()).into(holder.imageView);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, FishDetailActivity.class);
+                intent.putExtra("fishInfo", mData.get(position));
+                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+            }
+        });
     }
 
     @Override

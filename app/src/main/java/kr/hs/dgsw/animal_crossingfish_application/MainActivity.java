@@ -53,67 +53,67 @@ public class MainActivity extends AppCompatActivity {
                 binding.recyclerview.setLayoutManager(new GridLayoutManager(getApplicationContext(), 5));
                 switch (pos) {
                     case 0: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setAllJSONData());
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setAllJSONData(), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 1: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(1));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(1), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 2: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(2));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(2), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 3: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(3));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(3), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 4: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(4));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(4), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 5: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(5));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(5), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 6: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(6));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(6), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 7: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(7));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(7), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 8: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(8));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(8), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 9: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(9));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(9), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 10: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(10));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(10), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 11: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(11));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(11), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
                     case 12: {
-                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(12));
+                        fishListAdapter = new FishListAdapter((ArrayList<FishData>) setJSONData(12), getApplicationContext());
                         binding.recyclerview.setAdapter(fishListAdapter);
                         break;
                     }
@@ -155,7 +155,7 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public boolean onQueryTextChange(String newText) {
-                fishListAdapter = new FishListAdapter((ArrayList<FishData>) setSearchJSONData(newText));
+                fishListAdapter = new FishListAdapter((ArrayList<FishData>) setSearchJSONData(newText), getApplicationContext());
                 binding.recyclerview.setAdapter(fishListAdapter);
                 return true;
             }
@@ -227,6 +227,16 @@ public class MainActivity extends AppCompatActivity {
                 fishData.setApplyMonths(index);
                 fishData.setPrice(jsonObject.getInt("price"));
 
+
+                // ADD
+                fishData.setPrice(jsonObject.getInt("price"));
+                fishData.setOnlyRaining(jsonObject.getBoolean("onlyRaining"));
+                ArrayList<String> placeIndex = new ArrayList<>();
+                for (int j = 0; j < jsonObject.getJSONArray("place").length(); j ++) {
+                    placeIndex.add((String) jsonObject.getJSONArray("place").get(j));
+                }
+                fishData.setPlace(placeIndex);
+
                 int resID = getResId(jsonObject.getString("imageUrl"), R.drawable.class);
                 fishData.setImageUrl("android.resource://" + R.class.getPackage().getName()  + "/drawable/" + resID);
 
@@ -270,8 +280,17 @@ public class MainActivity extends AppCompatActivity {
                         index.add((Integer) jsonObject.getJSONArray("applyMonths").get(j));
                     }
                 }
-                fishData.setApplyMonths(index);
+
+                // ADD
                 fishData.setPrice(jsonObject.getInt("price"));
+                fishData.setOnlyRaining(jsonObject.getBoolean("onlyRaining"));
+                ArrayList<String> placeIndex = new ArrayList<>();
+                for (int j = 0; j < jsonObject.getJSONArray("place").length(); j ++) {
+                    placeIndex.add((String) jsonObject.getJSONArray("place").get(j));
+                }
+                fishData.setPlace(placeIndex);
+
+                fishData.setApplyMonths(index);
                 int resID = getResId(jsonObject.getString("imageUrl"), R.drawable.class);
                 fishData.setImageUrl("android.resource://" + R.class.getPackage().getName()  + "/drawable/" + resID);
 
@@ -322,11 +341,19 @@ public class MainActivity extends AppCompatActivity {
                     }
                 }
                 fishData.setApplyMonths(index);
+
+                // ADD
                 fishData.setPrice(jsonObject.getInt("price"));
+                fishData.setOnlyRaining(jsonObject.getBoolean("onlyRaining"));
+                ArrayList<String> placeIndex = new ArrayList<>();
+                for (int j = 0; j < jsonObject.getJSONArray("place").length(); j ++) {
+                    placeIndex.add((String) jsonObject.getJSONArray("place").get(j));
+                }
+                fishData.setPlace(placeIndex);
                 int resID = getResId(jsonObject.getString("imageUrl"), R.drawable.class);
                 fishData.setImageUrl("android.resource://" + R.class.getPackage().getName()  + "/drawable/" + resID);
 
-                if(apply) {
+                if (apply) {
                     fishDataList.add(fishData);
                 }
             }
