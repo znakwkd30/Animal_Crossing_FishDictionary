@@ -51,7 +51,7 @@ public class FishListAdapter extends RecyclerView.Adapter<FishListAdapter.ViewHo
             public void onClick(View v) {
                 Intent intent = new Intent(context, FishDetailActivity.class);
                 intent.putExtra("fishInfo", mData.get(position));
-                context.startActivity(intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK));
+                context.startActivity(intent);
             }
         });
     }

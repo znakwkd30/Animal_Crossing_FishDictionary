@@ -8,4 +8,10 @@
         app:showAsAction="collapseActionView|ifRoom"
         app:actionViewClass="android.widget.SearchView" />
 
+    <item android:id="@+id/voice"
+        android:title="음성검색"
+        android:icon="@android:drawable/ic_btn_speak_now"
+        app:showAsAction="collapseActionView|ifRoom"
+        app:actionViewClass="android.widget.SearchView" />
+
 </menu>
